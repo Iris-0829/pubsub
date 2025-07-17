@@ -13,6 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 set -eo pipefail
+
+export JAVA_HOME="$JAVA_HOME"
+export PATH="$JAVA_HOME/bin:$PATH"
+
 # Always run the cleanup script, regardless of the success of bouncing into
 # the container.
 function cleanup() {

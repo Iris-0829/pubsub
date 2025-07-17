@@ -15,6 +15,9 @@
 
 set -eo pipefail
 
+export JAVA_HOME="$JAVA_HOME"
+export PATH="$JAVA_HOME/bin:$PATH"
+
 function now { date +"%Y-%m-%d %H:%M:%S" | tr -d '\n' ;}
 function msg { println "$*" >&2 ;}
 function println { printf '%s\n' "$(now) $*" ;}
