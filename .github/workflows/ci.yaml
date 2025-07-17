@@ -32,15 +32,8 @@ jobs:
         with:
           distribution: zulu
           java-version: ${{matrix.java}}
-      - name: Set JAVA_HOME and update PATH
-        run: |
-          echo "JAVA_HOME=$(echo $JAVA_HOME)" >> $GITHUB_ENV
-          echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
       - run: java -version
-      - name: Check Maven version
-        run: mvn -version
-      - run: chmod +x flink-connector/.kokoro/*
-      - run: flink-connector/.kokoro/build.sh
+      - run: .kokoro/build.sh
         env:
           JOB_TYPE: test
   windows:
@@ -53,15 +46,8 @@ jobs:
         with:
           distribution: zulu
           java-version: 8
-      - name: Set JAVA_HOME and update PATH
-        run: |
-          echo "JAVA_HOME=$(echo $JAVA_HOME)" >> $GITHUB_ENV
-          echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
       - run: java -version
-      - name: Check Maven version
-        run: mvn -version
-      - run: chmod +x flink-connector/.kokoro/*
-      - run: flink-connector/.kokoro/build.bat
+      - run: .kokoro/build.bat
         env:
           JOB_TYPE: test
   dependencies:
@@ -75,15 +61,8 @@ jobs:
         with:
           distribution: zulu
           java-version: ${{matrix.java}}
-      - name: Set JAVA_HOME and update PATH
-        run: |
-          echo "JAVA_HOME=$(echo $JAVA_HOME)" >> $GITHUB_ENV
-          echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
       - run: java -version
-      - name: Check Maven version
-        run: mvn -version
-      - run: chmod +x flink-connector/.kokoro/*
-      - run: flink-connector/.kokoro/dependencies.sh
+      - run: .kokoro/dependencies.sh
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -92,14 +71,7 @@ jobs:
         with:
           distribution: zulu
           java-version: 11
-      - name: Set JAVA_HOME and update PATH
-        run: |
-          echo "JAVA_HOME=$(echo $JAVA_HOME)" >> $GITHUB_ENV
-          echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
       - run: java -version
-      - name: Check Maven version
-        run: mvn -version
-      - run: chmod +x flink-connector/.kokoro/*
-      - run: flink-connector/.kokoro/build.sh
+      - run: .kokoro/build.sh
         env:
           JOB_TYPE: lint
